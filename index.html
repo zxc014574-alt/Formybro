@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101827"><title>Небольшой сюрприз</title>
+<style>
+:root{color-scheme:dark;--pink:#ff9db7;--cream:#fff0d7}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 14px;color:#fff7f3;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 15% 15%,#273e62 0,transparent 42%),radial-gradient(ellipse at 85% 85%,#4b2949 0,transparent 40%),#101827}
+.card{width:min(100%,620px);padding:clamp(22px,5vw,38px);border:1px solid #ffffff22;border-radius:28px;background:#172235ef;box-shadow:0 24px 80px #0008;text-align:center;animation:appear .65s ease both}
+h1{margin:0 0 12px;color:var(--cream);font-size:clamp(26px,6vw,38px)}p{line-height:1.65;color:#f8eaf0;font-size:17px}.small{color:#c8c9d8;font-size:14px}
+button{border:0;border-radius:999px;padding:13px 30px;margin-top:12px;color:#291b2a;background:linear-gradient(135deg,#ffd8a8,#ff9db7);font-size:17px;font-weight:750;cursor:pointer;box-shadow:0 8px 24px #ff9db733;transition:transform .18s}
+button:hover{transform:translateY(-2px)}input{width:min(100%,360px);padding:14px 17px;border-radius:14px;border:1px solid #ffffff40;background:#0d1728;color:white;font-size:17px;outline:none;text-align:center}
+input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ff9db722}.photo{display:block;width:100%;max-height:430px;object-fit:contain;border-radius:18px;margin:0 auto 20px;background:#0b1422;box-shadow:0 12px 34px #0005}
+.photo.art{max-height:520px}.hidden{display:none}.message{color:#ffd5e1;font-size:clamp(20px,4.8vw,26px);font-weight:750}.error{min-height:24px;color:#ffb0b9;font-size:14px}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<main class="card" id="welcome"><h1>Эй, не волнуйся!</h1><p>Это не фишинг ссылка XD</p><p class="small">Тут просто кое-что маленькое для тебя.</p><button id="start">Оке</button></main>
+<main class="card hidden" id="gift"><img class="photo" src="rose.jpg" alt="Красная роза"><p class="message">Это тебе, пасиба что ты есть</p><p>Имя человека которого я ценю больше всего?</p><form id="answerForm"><input id="answer" type="text" placeholder="Напиши имя..." autocomplete="off" required><br><button type="submit">Ответить</button><div class="error" id="error" aria-live="polite"></div></form></main>
+<main class="card hidden" id="final"><img class="photo art" src="art.jpg" alt="Совместный арт"><p class="message">Пасиба еще раз за этот имбовый арт, и за улыбку которую ты даришь</p><button id="next">Оке</button></main>
+<main class="card hidden" id="well"><img class="photo" src="get_well.jpg" alt="Фотография для пожелания"><p class="message">Выздоравливай пожалуйста скорее!</p></main>
+<script>
+const pages=['welcome','gift','final','well'].map(id=>document.getElementById(id));
+function showPage(id){pages.forEach(page=>page.classList.toggle('hidden',page.id!==id));window.scrollTo({top:0,behavior:'smooth'});}
+document.getElementById('start').addEventListener('click',()=>showPage('gift'));
+document.getElementById('answerForm').addEventListener('submit',event=>{event.preventDefault();const value=document.getElementById('answer').value.trim().toLocaleLowerCase();if(value==='tamiris'||value==='тамирис'){showPage('final');}else{document.getElementById('error').textContent='Попробуй ещё раз.';}});
+document.getElementById('next').addEventListener('click',()=>showPage('well'));
+</script></body></html>
